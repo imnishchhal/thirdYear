@@ -1,182 +1,83 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Entry Form</title>
-    <style>
-        :root {
-            --primary-color: #4a90e2;
-            --bg-color: #f4f7f6;
-            --text-color: #333;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .form-container {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-        }
-        h2 {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="date"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
-        }
-        .radio-group, .checkbox-group {
-            display: flex;
-            gap: 20px;
-            margin-top: 5px;
-        }
-        .radio-group label, .checkbox-group label {
-            font-weight: normal;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-        }
-        textarea {
-            resize: vertical;
-            height: 80px;
-        }
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        button {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        button[type="submit"] {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        button[type="submit"]:hover {
-            background-color: #357abd;
-        }
-        button[type="reset"] {
-            background-color: #e0e0e0;
-            color: #333;
-        }
-        button[type="reset"]:hover {
-            background-color: #d0d0d0;
-        }
-    </style>
+    <title>Student Registration Form</title>
 </head>
 <body>
 
-<div class="form-container">
-    <h2>Student Details Entry Form</h2>
-    <form action="#" method="POST">
+    <h2>Student Details Form</h2>
+
+    <form action="/submit-student-details" method="POST">
         
-        <!-- Full Name -->
-        <div class="form-group">
-            <label for="fullname">Full Name</label>
-            <input type="text" id="fullname" name="fullname" placeholder="Enter student's full name" required>
-        </div>
+        <fieldset>
+            <legend>Personal Details</legend>
+            
+            <label for="fname">First Name:</label><br>
+            <input type="text" id="fname" name="firstname" required><br><br>
 
-        <!-- Enrollment / Roll Number -->
-        <div class="form-group">
-            <label for="rollno">Enrollment / Roll Number</label>
-            <input type="text" id="rollno" name="rollno" placeholder="e.g., STU12345" required>
-        </div>
+            <label for="lname">Last Name:</label><br>
+            <input type="text" id="lname" name="lastname" required><br><br>
 
-        <!-- Email Address -->
-        <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="student@example.com" required>
-        </div>
+            <label for="dob">Date of Birth:</label><br>
+            <input type="date" id="dob" name="dob" required><br><br>
 
-        <!-- Contact Number -->
-        <div class="form-group">
-            <label for="phone">Contact Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
-        </div>
+            <label>Gender:</label><br>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label><br><br>
+        </fieldset>
 
-        <!-- Date of Birth -->
-        <div class="form-group">
-            <label for="dob">Date of Birth</label>
-            <input type="date" id="dob" name="dob" required>
-        </div>
+        <br>
 
-        <!-- Gender Selection -->
-        <div class="form-group">
-            <label>Gender</label>
-            <div class="radio-group">
-                <label><input type="radio" name="gender" value="Male" required> Male</label>
-                <label><input type="radio" name="gender" value="Female"> Female</label>
-                <label><input type="radio" name="gender" value="Other"> Other</label>
-            </div>
-        </div>
+        <fieldset>
+            <legend>Contact Information</legend>
 
-        <!-- Course Selection Dropdown -->
-        <div class="form-group">
-            <label for="course">Select Course</label>
-            <select id="course" name="course" required>
-                <option value="" disabled selected>-- Choose a Course --</option>
-                <option value="BTech">B.Tech (Computer Science)</option>
-                <option value="BSc">B.Sc (Information Technology)</option>
-                <option value="BBA">BBA (Business Administration)</option>
-                <option value="BCA">BCA (Computer Applications)</option>
-            </select>
-        </div>
+            <label for="email">Email Address:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
 
-        <!-- Address -->
-        <div class="form-group">
-            <label for="address">Residential Address</label>
-            <textarea id="address" name="address" placeholder="Enter street, city, state, pin code" required></textarea>
-        </div>
+            <label for="phone">Phone Number:</label><br>
+            <input type="tel" id="phone" name="phone"><br><br>
 
-        <!-- Buttons -->
-        <div class="button-group">
-            <button type="submit">Submit Details</button>
-            <button type="reset">Clear Form</button>
-        </div>
+            <label for="address">Address:</label><br>
+            <textarea id="address" name="address" rows="4" cols="30"></textarea><br><br>
+        </fieldset>
+
+        <br>
+
+        <fieldset>
+            <legend>Academic Information</legend>
+
+            <label for="student_id">Student ID:</label><br>
+            <input type="text" id="student_id" name="student_id" required><br><br>
+
+            <label for="course">Select Course:</label><br>
+            <select id="course" name="course">
+                <option value="cs">Computer Science</option>
+                <option value="it">Information Technology</option>
+                <option value="ee">Electrical Engineering</option>
+                <option value="me">Mechanical Engineering</option>
+            </select><br><br>
+
+            <label>Extracurricular Activities:</label><br>
+            <input type="checkbox" id="sports" name="activities" value="sports">
+            <label for="sports">Sports</label><br>
+            <input type="checkbox" id="music" name="activities" value="music">
+            <label for="music">Music</label><br>
+            <input type="checkbox" id="arts" name="activities" value="arts">
+            <label for="arts">Arts & Drama</label><br><br>
+        </fieldset>
+
+        <br>
+
+        <input type="submit" value="Submit Details">
+        <input type="reset" value="Reset Form">
 
     </form>
-</div>
 
 </body>
 </html>
