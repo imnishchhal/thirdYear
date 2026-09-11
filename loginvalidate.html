@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Login</title>
+  <style>
+    body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f0f0; }
+    .card { background: white; padding: 20px; border-radius: 8px; width: 250px; }
+    input { width: 100%; padding: 8px; margin: 8px 0; box-sizing: border-box; }
+    button { width: 100%; padding: 8px; background: #28a745; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h3>Login</h3>
+    <input type="text" id="uid" placeholder="User ID">
+    <input type="password" id="pwd" placeholder="Password">
+    <button onclick="login()">Submit</button>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    function login() {
+      // Local valid credentials
+      const validId = "admin";
+      const validPass = "12245";
+
+      // Read input values
+      const u = document.getElementById("uid").value;
+      const p = document.getElementById("pwd").value;
+      const msg = document.getElementById("msg");
+
+      // Authenticate
+      if (u === validId && p === validPass) {
+        msg.style.color = "green";
+        msg.textContent = "Success!";
+      } else {
+        msg.style.color = "red";
+        msg.textContent = "Invalid Credentials!";
+      }
+    }
+  </script>
+
+</body>
+</html>
