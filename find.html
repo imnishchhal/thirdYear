@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Guess Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            transition: background-color 0.4s ease;
+        }
+
+        /* Success state */
+        body.correct {
+            background-color: #2ecc71 !important;
+        }
+
+        /* Red flash state */
+        body.flash-red {
+            background-color: #e74c3c !important;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input[type="password"]:focus {
+            border-color: #3498db;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Guess the Password</h2>
+        <form id="passwordForm">
+            <input type="password" id="passwordInput" placeholder="Enter password..." required autocomplete="off">
+            <button type="submit">Submit</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        // Set your target secret password here
+        const SECRET_PASSWORD = "secretpassword";
+
+        const form = document.getElementById('passwordForm');
+        const input = document.getElementById('passwordInput');
+        const message = document.getElementById('message');
+        const body = document.body;
+
+        let isFlashing = false;
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Ignore input while flash animation is running
+            if (isFlashing) return;
+
+            const userGuess = input.value;
+
+            if (userGuess === SECRET_PASSWORD) {
+                // Correct password: turns body green permanently
+                body.className = 'correct';
+                message.style.color = '#155724';
+                message.textContent = "Access Granted! Correct Password.";
+                input.disabled = true;
+            } else {
+                // Incorrect password: flash red twice
+                message.style.color = '#721c24';
+                message.textContent = "Incorrect password! Try again.";
+                flashRedTwice();
+            }
+        });
+
+        function flashRedTwice() {
+            isFlashing = true;
+            
+            // First flash ON
+            body.classList.add('flash-red');
+
+            // First flash OFF
+            setTimeout(() => {
+                body.classList.remove('flash-red');
+            }, 200);
+
+            // Second flash ON
+            setTimeout(() => {
+                body.classList.add('flash-red');
+            }, 400);
+
+            // Second flash OFF & re-enable form interactions
+            setTimeout(() => {
+                body.classList.remove('flash-red');
+                isFlashing = false;
+            }, 600);
+        }
+    </script>
+
+</body>
+</html>
