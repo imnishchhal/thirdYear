@@ -15,4 +15,9 @@
         <author>Kyle Simpson</author>
         <year>2015</year>
     </book>
+    <book>
+        <title>Harry Potter and the Philosopher's Stone </title>
+        <author>J.K Rowling</author>
+        <year>1997</year>
+    </book>
 </catalog>
