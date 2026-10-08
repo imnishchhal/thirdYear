@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XML to HTML Table</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 15px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+
+    <h2>Book Catalog from XML</h2>
+    
+    <table id="bookTable">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <!-- Embedded JavaScript -->
+    <script>
+        // Fetch the XML file
+        fetch('data.xml')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(str => {
+                // Parse the XML text into an XML DOM document
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(str, "text/xml");
+                
+                // Extract all <book> elements
+                const books = xmlDoc.getElementsByTagName("book");
+                const tbody = document.querySelector("#bookTable tbody");
+                
+                // Loop through each book and create table rows
+                for (let i = 0; i < books.length; i++) {
+                    const title = books[i].getElementsByTagName("title")[0].textContent;
+                    const author = books[i].getElementsByTagName("author")[0].textContent;
+                    const year = books[i].getElementsByTagName("year")[0].textContent;
+                    
+                    // Create a new table row
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${title}</td>
+                        <td>${author}</td>
+                        <td>${year}</td>
+                    `;
+                    
+                    // Append the row to the table body
+                    tbody.appendChild(row);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching or parsing XML:', error);
+            });
+    </script>
+</body>
+</html>
